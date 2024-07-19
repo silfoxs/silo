@@ -24,6 +24,12 @@ pub enum Commands {
         #[arg(help = "要转换为时间戳的时间", default_value = "")]
         datetime: String,
     },
+    /// 查询工具版本
+    #[command(about = "查询字符串 MD5 值", long_about = "查询字符串 MD5 值")]
+    Md5 {
+        #[arg(help = "需要计算的字符串")]
+         str: String,
+    }
 }
 
 pub fn run() {
@@ -39,6 +45,9 @@ pub fn run() {
             },
             Commands::Ts { datetime } => {
                 commands::query_timestamp::handle(datetime);
+            },
+            Commands::Md5 { str } => {
+                commands::silo_md5::handle(str);
             },
         },
         None => {
