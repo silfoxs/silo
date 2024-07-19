@@ -19,8 +19,8 @@ pub enum Commands {
         uuid: String,
     },
     /// 查询工具版本
-    #[command(about = "查询工具版本", long_about = "显示此 CLI 工具的版本")]
-    Version,
+    #[command(about = "查询 timestamp", long_about = "查询当前 timestamp 单位：秒（s）")]
+    Ts,
 }
 
 pub fn run() {
@@ -34,8 +34,8 @@ pub fn run() {
             Commands::Query { uuid } => {
                 commands::query_uuid::handle(&uuid);
             },
-            Commands::Version => {
-                commands::version::handle();
+            Commands::Ts => {
+                commands::query_timestamp::handle();
             },
         },
         None => {
