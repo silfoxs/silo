@@ -20,7 +20,10 @@ pub enum Commands {
     },
     /// 查询工具版本
     #[command(about = "查询 timestamp", long_about = "查询当前 timestamp 单位：秒（s）")]
-    Ts,
+    Ts {
+        #[arg(help = "要转换为时间戳的时间", default_value = "")]
+        datetime: String,
+    },
 }
 
 pub fn run() {
@@ -29,13 +32,13 @@ pub fn run() {
     match &cli.command {
         Some(command) => match command {
             Commands::Uuid { num } => {
-                commands::generate_uuid::handle(*num);
+                commands::silo_uuid::handle(*num);
             },
             Commands::Query { uuid } => {
                 commands::query_uuid::handle(&uuid);
             },
-            Commands::Ts => {
-                commands::query_timestamp::handle();
+            Commands::Ts { datetime } => {
+                commands::query_timestamp::handle(datetime);
             },
         },
         None => {
